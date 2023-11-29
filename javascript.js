@@ -1,57 +1,79 @@
-//create a variable for computer imput
-//computer imput should be random
-for (let i = 0; i < 5; i++) {
+let userScore = 0;
+let computerScore = 0;
+const userScore_span = document.getElementById("user-score");
+const compScore_span = document.getElementById("computer-score");
+const scoreBoard_div = document.querySelector(".scoreBoard");
+const result_div = document.querySelector(".result");
+const rock_div = document.getElementById("rock");
+const paper_div = document.getElementById("paper");
+const scissors_div = document.getElementById("scissors");
 
-let randomChoice = Math.floor(Math.random()*3);
+function getComputerChoice() {
+    const choices = ["r","p","s"];
+    const ranNumber = Math.floor(Math.random()*3);
+    return choices[ranNumber];
+}
 
-function getComputerChoice(randomChoice) {
-    if (randomChoice == 0) {
-        return randomChoice = "ROCK"
-    } else if (randomChoice == 1) {
-        return randomChoice = "PAPER"
-    } else {
-        return randomChoice = "SCISSOR"
+function convertToWord(letter){
+    if (letter === "r") return "ROCK";
+    if (letter === "p") return "PAPER";
+    return "SCISSORS";
+}
+
+function win(user, computer) {
+    userScore++;
+    userScore_span.innerHTML = userScore;
+    compScore_span.innerHTML = computerScore;
+    result_div.innerHTML = convertToWord(user) + " beats " + convertToWord(computer) +". YOU WIN!!"
+}
+
+function lose(user, computer) {
+    computerScore++;
+    userScore_span.innerHTML = userScore;
+    compScore_span.innerHTML = computerScore;
+    result_div.innerHTML = convertToWord(computer) + " beats " + convertToWord(user) +". YOU LOSE!!"
+}
+
+
+function tie(user, computer) {
+    result_div.innerHTML = "You both chose " + convertToWord(user) +". IT'S A TIE";
+}
+
+function game(userChoice){
+    const computerChoice = getComputerChoice();
+    switch(userChoice + computerChoice){
+        case "rs":
+        case "pr":
+        case "sp":
+            win(userChoice, computerChoice);
+            break;
+        
+        case "rp":
+        case "ps":
+        case "sr":
+            lose(userChoice, computerChoice);
+             break;
+
+        case "rr":
+        case "pp":
+        case "ss":
+            tie(userChoice, computerChoice);
+             break;
     }
 }
 
-let computerChoice = getComputerChoice(randomChoice)
+function main(){
+    rock_div.addEventListener('click', function() {
+        game("r");
+    })
 
+    paper_div.addEventListener('click', function() {
+        game("p");
+    })
 
-//create a variable for user writen imput
-//user imput should accept upper, lower, and mixed cases
-
-let userChoice = prompt("Choose Rock, Paper, or Scissor: ").toUpperCase();
-
-
-
-
-
-if (userChoice === computerChoice) {
-    console.log("Both Chose " + userChoice + ". It's a TIE")
-} else if (userChoice === "ROCK" && computerChoice === "PAPER"){
-    console.log("You Chose " + userChoice + " and Computer Chose " + computerChoice + ". YOU LOSE!")
-} else if (userChoice === "ROCK" && computerChoice === "SCISSOR") {
-    console.log("You Chose " + userChoice + " and Computer Chose " + computerChoice + ". YOU WIN!")
-} else if (userChoice === "PAPER" && computerChoice === "SCISSOR"){
-    console.log("You Chose " + userChoice + " and Computer Chose " + computerChoice + ". YOU LOSE!")
-} else if (userChoice === "PAPER" && computerChoice === "ROCK") {
-    console.log("You Chose " + userChoice + " and Computer Chose " + computerChoice + ". YOU WIN!")
-} else if (userChoice === "SCISSOR" && computerChoice === "ROCK"){
-    console.log("You Chose " + userChoice + " and Computer Chose " + computerChoice + ". YOU LOSE!")
-} else if (userChoice === "SCISSOR" && computerChoice === "PAPER"){
-    console.log("You Chose " + userChoice + " and Computer Chose " + computerChoice + ". YOU WIN!")
-} else {
-    userChoice = prompt("INVALID CHOICE! Please Choose Rock, Paper, or Scissor: ").toUpperCase();
+    scissors_div.addEventListener('click', function() {
+        game("s");
+    })
 }
 
-}
-// make sure that spelling is correct. Infinite loop needed until correct
-// create function where if same state 'tie'
-// if player chooses rock and comp picks scissors 'you win'
-// if player chooses rock and com picks paper 'you lose'
-// if player chooses paper and comp picks rock 'you win'
-// if player chooses paper and com picks scissors 'you lose'
-// if player chooses scissors and comp picks paper 'you win'
-// if player chooses scissors and com picks rock 'you lose'
-
-//loop for 5 times
+main();

@@ -3,11 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="javascript.js"></script>
+    <title>ROCK, PAPER, SCISSORS</title>
+    <script src="javascript.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+
     
 </head>
 <body>
-    
+    <header>
+        <h1>ROCK | PAPER | SCISSORS </h1>
+        </header>
+
+    <div class="scoreBoard">
+        <div class="badge" id="userLable">User</div>
+        <div class="badge" id="computerLable">Comp</div>
+        <span><span id="user-score">0</span>:<span id="computer-score">0</span></span>
+    </div>
+
+    <div class="result">
+        <p>LET'S PLAY A GAME!</p>
+    </div>
+
+    <div class="choices">
+        <div class="choice" id="rock">
+            <button>ROCK</button>
+        </div>
+        <div class="choice" id="paper">
+            <button>PAPER</button>
+        </div>
+        <div class="choice" id="scissors">
+            <button>SCISSORS</button>
+        </div>
+    </div>
+
+    <p id="actionMessage">MAKE YOUR MOVE</p>
 </body>
 </html>
